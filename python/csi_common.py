@@ -34,12 +34,30 @@ def parse_line(line):
     return pkt
 
 
+# Counters so a server can say *why* nothing is arriving (silence vs. unreadable lines)
+STATS = {"lines": 0, "csi_rejected": 0, "last_csi_rejected": "", "last_other": ""}
+
+
+def _parse_and_track(line):
+    p = parse_line(line)
+    text = line.strip()
+    if text:
+        STATS["lines"] += 1
+        if p is None:
+            if text.startswith("CSI_DATA"):
+                STATS["csi_rejected"] += 1
+                STATS["last_csi_rejected"] = text[:300]
+            else:
+                STATS["last_other"] = text[:200]   # e.g. a boot or WiFi log line: proof the board is talking
+    return p
+
+
 def packets(port=None, baud=115200, file=None):
     """Yield parsed packets from a serial port, or from a saved text file."""
     if file:
         with open(file, "r", errors="ignore") as f:
             for line in f:
-                p = parse_line(line)
+                p = _parse_and_track(line)
                 if p:
                     yield p
         return
@@ -53,7 +71,7 @@ def packets(port=None, baud=115200, file=None):
     try:
         while True:
             line = ser.readline().decode("utf-8", errors="ignore")
-            p = parse_line(line)
+            p = _parse_and_track(line)
             if p:
                 yield p
     finally:
