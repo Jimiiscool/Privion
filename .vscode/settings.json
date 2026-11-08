@@ -1,0 +1,14 @@
+{
+    "idf.currentSetup": "C:/Espressif/frameworks/esp-idf-v5.5.6/",
+    "idf.openOcdConfigs": [
+        "board/esp32s3-builtin.cfg"
+    ],
+    "idf.customExtraVars": {},
+    "clangd.path": "C:\\Espressif\\tools\\esp-clang\\esp-19.1.2_20250312\\esp-clang\\bin\\clangd.exe",
+    "clangd.arguments": [
+      "--background-index",
+      "--query-driver=**",
+      "--compile-commands-dir=c:\\Users\\borut\\github_repos\\Privion\\build"
+    ],
+    "cmake.sourceDirectory": "C:/Users/borut/github_repos/Privion/firmware/csi_recv_router"
+}
