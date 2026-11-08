@@ -1,0 +1,4 @@
+# Replace with your actual hostname. Backend stays on loopback.
+avon.example.com {
+    reverse_proxy 127.0.0.1:8000
+}
