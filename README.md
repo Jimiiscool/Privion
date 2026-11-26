@@ -1,7 +1,6 @@
 # Recv router CSI example
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
-
+Made by Atharva Naveen, Siddhant Samar, Jimi Shodunke, and Ram 
 The device triggers the router to send packets through the Ping command to obtain the CSI data between the device and the router
 
 ## How to use example
